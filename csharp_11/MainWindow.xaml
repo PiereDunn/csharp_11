@@ -1,0 +1,162 @@
+﻿<Window x:Class="csharp_11.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="MainWindow" 
+        Height="450" 
+        Width="800"
+        MaxHeight="450" 
+        MaxWidth="800"
+        MinHeight="450" 
+        MinWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="103*"/>
+            <ColumnDefinition Width="57*"/>
+        </Grid.ColumnDefinitions>
+
+        <ListBox x:Name="ClientsListBox" 
+                 Grid.Column="1" 
+                 d:ItemsSource="{d:SampleData ItemCount=5}" 
+                 SelectionChanged="ListBox_SelectionChanged">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin = "5">
+                        <TextBlock Text = "{Binding Fam}"/>
+                        <TextBlock Text = "{Binding Name}"/>
+                        <TextBlock Text = "{Binding Otch}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+
+        </ListBox>
+
+
+        <TextBlock x:Name="ClientInformationtextBlock" 
+                   Margin="0,90,0,0" 
+                   TextWrapping="Wrap" 
+                   VerticalAlignment="Top" 
+                   Width="494" 
+                   Height="50"
+                   HorizontalAlignment="Center" TextAlignment="Center"/>
+        <TextBox x:Name="FamTB" HorizontalAlignment="Left" 
+                 Margin="71,187,0,0" 
+                 TextWrapping="Wrap" 
+                 Text="Фамилия" 
+                 VerticalAlignment="Top" 
+                 Width="70"
+                 Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
+        <TextBox x:Name="NameTB" HorizontalAlignment="Left" 
+            Margin="146,187,0,0" 
+            TextWrapping="Wrap" 
+            Text="Имя" 
+            VerticalAlignment="Top" 
+            Width="70"
+            Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
+        <TextBox x:Name="OtchTB" HorizontalAlignment="Left" 
+            Margin="221,187,0,0" 
+            TextWrapping="Wrap" 
+            Text="Отчество" 
+            VerticalAlignment="Top" 
+            Width="70"
+            Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
+        <TextBox x:Name="NumberTB" HorizontalAlignment="Left" 
+            Margin="296,187,0,0" 
+            TextWrapping="Wrap" 
+            Text="Номер" 
+            VerticalAlignment="Top" 
+            Width="70"
+            Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
+        <TextBox x:Name="PassTB" HorizontalAlignment="Left" 
+            Margin="371,187,0,0" 
+            TextWrapping="Wrap" 
+            Text="Паспорт" 
+            VerticalAlignment="Top" 
+            Width="70"
+            Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
+        <TextBlock HorizontalAlignment="Center" 
+                   Margin="0,166,0,0" 
+                   TextWrapping="Wrap" 
+                   VerticalAlignment="Top" 
+                   Width="193" TextAlignment="Center" FontSize="14">
+            <Run Language="ru-ru" 
+                 Text="Изменение"/></TextBlock>
+        <TextBox x:Name="FamNew" HorizontalAlignment="Left" 
+            Margin="71,302,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="70"
+            Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
+        <TextBox x:Name="NameNew" HorizontalAlignment="Left" 
+            Margin="146,302,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="70"
+            Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
+        <TextBox x:Name="OtchNew" HorizontalAlignment="Left" 
+            Margin="221,302,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="70"
+            Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
+        <TextBox x:Name="NumberNew" HorizontalAlignment="Left" 
+            Margin="296,302,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="70"
+            Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
+        <TextBox x:Name="PassNew" HorizontalAlignment="Left" 
+            Margin="371,302,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="70"
+            Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
+        <TextBlock HorizontalAlignment="Center" 
+            Margin="0,281,0,0" 
+            TextWrapping="Wrap" 
+            VerticalAlignment="Top" 
+            Width="193" TextAlignment="Center" FontSize="14"><Run Language="ru-ru" Text="Добавление"/></TextBlock>
+        <Button x:Name="ButtonTB" 
+                Content="Изменить" 
+                HorizontalAlignment="Left" 
+                Margin="221,222,0,0" 
+                VerticalAlignment="Top" 
+                Width="70" Click="ButtonTB_Click" IsEnabled="False"/>
+        <Button x:Name="ButtonNew" 
+                Content="Добавить" 
+                HorizontalAlignment="Center" 
+                Margin="0,337,0,0" 
+                VerticalAlignment="Top" 
+                Width="70" 
+                Click="ButtonNew_Click" IsEnabled="False"/>
+        <TextBlock HorizontalAlignment="Left" 
+                   Margin="380,21,0,0" 
+                   TextWrapping="Wrap" 
+                   Text="Выберите клиента:" 
+                   VerticalAlignment="Top"/>
+        <Button x:Name="ManagerButton" 
+                Content="Менеджер" 
+                HorizontalAlignment="Left" 
+                Margin="33,19,0,0" 
+                VerticalAlignment="Top" 
+                Width="73" 
+                Click="ManagerButton_Click" IsEnabled="False"/>
+        <Button x:Name="ConsultantButton" 
+                Content="Консультант" 
+                HorizontalAlignment="Left" 
+                Margin="143,19,0,0" 
+                VerticalAlignment="Top" 
+                Width="73" 
+                Click="ConsultantButton_Click" IsEnabled="False"/>
+        <Button x:Name="ButtonSort" 
+                Content="Сортировать" 
+                HorizontalAlignment="Left" 
+                Margin="382,42,0,0" 
+                VerticalAlignment="Top" 
+                Width="101" 
+                Click="ButtonSort_Click"/>
+
+    </Grid>
+</Window>
