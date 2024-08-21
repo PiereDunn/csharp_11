@@ -150,13 +150,6 @@
                 VerticalAlignment="Top" 
                 Width="73" 
                 Click="ConsultantButton_Click" IsEnabled="False"/>
-        <Button x:Name="ButtonSort" 
-                Content="Сортировать" 
-                HorizontalAlignment="Left" 
-                Margin="382,42,0,0" 
-                VerticalAlignment="Top" 
-                Width="101" 
-                Click="ButtonSort_Click"/>
 
     </Grid>
 </Window>

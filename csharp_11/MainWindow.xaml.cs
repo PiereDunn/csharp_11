@@ -1,20 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace csharp_11
 {
@@ -23,7 +12,7 @@ namespace csharp_11
     /// </summary>
     public partial class MainWindow : Window
     {
-        static ObservableCollection<Client> clients = new ObservableCollection<Client>();
+        static List<Client> clients = new List<Client>();
         static string path = "emp.csv";
         bool managerBool = false;
         bool consultantBool = false;
@@ -33,7 +22,7 @@ namespace csharp_11
         {
             GetAllClients();
             InitializeComponent();
-            ClientsListBox.ItemsSource = clients;
+            ClientsListBox.ItemsSource = clients.OrderBy(client => client.Fam);
         }
        
         /// <summary>
@@ -43,19 +32,21 @@ namespace csharp_11
         /// <param name="e"></param>
         private void ButtonTB_Click(object sender, RoutedEventArgs e)
         {
-            Client client = ClientsListBox.SelectedItem as Client;
+            Client client1 = ClientsListBox.SelectedItem as Client;
             if(managerBool)
             {
-                client.Fam = FamTB.Text;
-                client.Name = NameTB.Text;
-                client.Otch = OtchTB.Text;
-                client.Number = NumberTB.Text;
-                client.Pass = PassTB.Text;
+                client1.Fam = FamTB.Text;
+                client1.Name = NameTB.Text;
+                client1.Otch = OtchTB.Text;
+                client1.Number = NumberTB.Text;
+                client1.Pass = PassTB.Text;
             }
             else if (consultantBool)
             {
-                client.Number = NumberTB.Text;
+                client1.Number = NumberTB.Text;
             }
+
+            ClientsListBox.ItemsSource = clients.OrderBy(client => client.Fam);
         }
 
         /// <summary>
@@ -74,6 +65,8 @@ namespace csharp_11
                                NumberNew.Text,                    //Номер телефона
                                PassNew.Text));                    //Паспорт
             }
+
+            ClientsListBox.ItemsSource = clients.OrderBy(client => client.Fam);
         }
 
         /// <summary>
@@ -94,13 +87,13 @@ namespace csharp_11
         /// Чтение всего файла с рабочими и возврат массива данных
         /// </summary>
         /// <returns></returns>
-        static ObservableCollection<Client> GetAllClients()
+        static List<Client> GetAllClients()
         {
             if (File.Exists(path))
             {
                 using (StreamReader sr = new StreamReader(path))
                 {
-                    string[] lines = sr.ReadToEnd().Split('@');    //Массив строк
+                    string[] lines = sr.ReadToEnd().Split('\n');    //Массив строк
 
                     for (int i = 0; i < lines.Length; i++)
                     {
@@ -253,16 +246,6 @@ namespace csharp_11
 
             Client client = ClientsListBox.SelectedItem as Client;
             ClientInformation(client);
-        }
-
-        /// <summary>
-        /// Сортировка списка клиентов по алфавиту
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ButtonSort_Click(object sender, RoutedEventArgs e)
-        {
-            //ClientsListBox.Sorted = true;
         }
     }
 }
