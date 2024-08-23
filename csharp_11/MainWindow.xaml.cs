@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -12,12 +12,14 @@ namespace csharp_11
     /// </summary>
     public partial class MainWindow : Window
     {
-        static List<Client> clients = new List<Client>();
+        #region Vars
+        static ObservableCollection<Client> clients = new ObservableCollection<Client>();
         static string path = "emp.csv";
         bool managerBool = false;
         bool consultantBool = false;
+        bool listBoxClick = false;
+        #endregion
 
-        
         public MainWindow()
         {
             GetAllClients();
@@ -78,16 +80,15 @@ namespace csharp_11
         {
             Client client = ClientsListBox.SelectedItem as Client;
             ClientInformation(client);
-            ManagerButton.IsEnabled = true;
-            ConsultantButton.IsEnabled = true;
             ButtonTB.IsEnabled = true;
+            listBoxClick = true;
         }
 
         /// <summary>
         /// Чтение всего файла с рабочими и возврат массива данных
         /// </summary>
         /// <returns></returns>
-        static List<Client> GetAllClients()
+        static ObservableCollection<Client> GetAllClients()
         {
             if (File.Exists(path))
             {
@@ -201,24 +202,31 @@ namespace csharp_11
         /// <param name="e"></param>
         private void ManagerButton_Click(object sender, RoutedEventArgs e)
         {
-            FamTB.IsEnabled = true;
-            NameTB.IsEnabled = true;
-            OtchTB.IsEnabled = true;
-            NumberTB.IsEnabled = true;
-            PassTB.IsEnabled = true;
+            ClientsListBox.IsEnabled = true;  //Включение листбокса с клиентами
+            ManagerButton.IsEnabled = false;  //Отключение активности нажатой кнопки менеджера
+            ConsultantButton.IsEnabled = true;  //Включение активности кнопки консультанта
 
-            ButtonNew.IsEnabled = true;
-            FamNew.IsEnabled = true;
-            NameNew.IsEnabled = true;
-            OtchNew.IsEnabled = true;
-            NumberNew.IsEnabled = true;
-            PassNew.IsEnabled = true;
+            FamTB.IsEnabled = true;  //Включение окошка изменения фамилии
+            NameTB.IsEnabled = true;  //Включение окошка изменения имени
+            OtchTB.IsEnabled = true;  //Включение окошка изменения отчества
+            NumberTB.IsEnabled = true;  //Включение окошка изменения номера
+            PassTB.IsEnabled = true;  //Включение окошка изменения паспорта
+
+            ButtonNew.IsEnabled = true;  //Включение кнопки добавления нового клиента для менеджера
+            FamNew.IsEnabled = true;  //Включение окошка добавления фамилии
+            NameNew.IsEnabled = true;  //Включение окошка добавления имени
+            OtchNew.IsEnabled = true;  //Включение окошка добавления отчества
+            NumberNew.IsEnabled = true;  //Включение окошка добавления номера
+            PassNew.IsEnabled = true;  //Включение окошка добавления паспорта
 
             consultantBool = false;
             managerBool = true;
 
-            Client client = ClientsListBox.SelectedItem as Client;
-            ClientInformation(client);
+            if (listBoxClick)  //Проверка нажатия на окошко с клиентами
+            {
+                Client client = ClientsListBox.SelectedItem as Client;
+                ClientInformation(client);
+            }
         }
 
         /// <summary>
@@ -228,24 +236,33 @@ namespace csharp_11
         /// <param name="e"></param>
         private void ConsultantButton_Click(object sender, RoutedEventArgs e)
         {
-            FamTB.IsEnabled = false;
-            NameTB.IsEnabled = false;
-            OtchTB.IsEnabled = false;
-            NumberTB.IsEnabled = true;
-            PassTB.IsEnabled = false;
+            ClientsListBox.IsEnabled = true;  //Включение листбокса с клиентами
+            ConsultantButton.IsEnabled = false;  //Отключение активности нажатой кнопки консультанта
+            ManagerButton.IsEnabled = true;  //Включение активности кнопки менеджера
 
-            ButtonNew.IsEnabled = false;
-            FamNew.IsEnabled = false;
-            NameNew.IsEnabled = false;
-            OtchNew.IsEnabled = false;
-            NumberNew.IsEnabled = false;
-            PassNew.IsEnabled = false;
+            FamTB.IsEnabled = false;  //Отключение окошка изменения фамилии
+            NameTB.IsEnabled = false;  //Отключение окошка изменения имени
+            OtchTB.IsEnabled = false;  //Отключение окошка изменения отчества
+            NumberTB.IsEnabled = true;  //Отключение окошка изменения номера
+            PassTB.IsEnabled = false;  //Отключение окошка изменения паспорта
+
+            ButtonNew.IsEnabled = false;  //Отключение кнопки добавления нового клиента для консультанта
+            FamNew.IsEnabled = false;  //Отключение окошка добавления фамилии
+            NameNew.IsEnabled = false;  //Отключение окошка добавления имени
+            OtchNew.IsEnabled = false;  //Отключение окошка добавления отчества
+            NumberNew.IsEnabled = false;  //Отключение окошка добавления номера
+            PassNew.IsEnabled = false;  //Отключение окошка добавления паспорта
+
+
 
             managerBool = false;
             consultantBool = true;
 
-            Client client = ClientsListBox.SelectedItem as Client;
-            ClientInformation(client);
+            if (listBoxClick)  //Проверка нажатия на окошко с клиентами
+            {
+                Client client = ClientsListBox.SelectedItem as Client;
+                ClientInformation(client);
+            }
         }
     }
 }
