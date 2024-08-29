@@ -20,7 +20,7 @@
         <ListBox x:Name="ClientsListBox" 
                  Grid.Column="1" 
                  d:ItemsSource="{d:SampleData ItemCount=5}" 
-                 SelectionChanged="ListBox_SelectionChanged" IsEnabled="False">
+                 SelectionChanged="ListBox_SelectionChanged" IsEnabled="False" Margin="0,10,190,10">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Margin = "5">
@@ -35,121 +35,172 @@
 
 
         <TextBlock x:Name="ClientInformationtextBlock" 
-                   Margin="0,90,0,0" 
+                   Margin="0,58,0,0" 
                    TextWrapping="Wrap" 
                    VerticalAlignment="Top" 
                    Width="494" 
                    Height="50"
                    HorizontalAlignment="Center" TextAlignment="Center"/>
         <TextBox x:Name="FamTB" HorizontalAlignment="Left" 
-                 Margin="71,187,0,0" 
+                 Margin="71,150,0,0" 
                  TextWrapping="Wrap" 
                  Text="Фамилия" 
                  VerticalAlignment="Top" 
                  Width="70"
                  Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
         <TextBox x:Name="NameTB" HorizontalAlignment="Left" 
-            Margin="146,187,0,0" 
+            Margin="146,150,0,0" 
             TextWrapping="Wrap" 
             Text="Имя" 
             VerticalAlignment="Top" 
             Width="70"
             Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
         <TextBox x:Name="OtchTB" HorizontalAlignment="Left" 
-            Margin="221,187,0,0" 
+            Margin="221,150,0,0" 
             TextWrapping="Wrap" 
             Text="Отчество" 
             VerticalAlignment="Top" 
             Width="70"
             Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
         <TextBox x:Name="NumberTB" HorizontalAlignment="Left" 
-            Margin="296,187,0,0" 
+            Margin="296,150,0,0" 
             TextWrapping="Wrap" 
             Text="Номер" 
             VerticalAlignment="Top" 
             Width="70"
             Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
         <TextBox x:Name="PassTB" HorizontalAlignment="Left" 
-            Margin="371,187,0,0" 
+            Margin="371,150,0,0" 
             TextWrapping="Wrap" 
             Text="Паспорт" 
             VerticalAlignment="Top" 
             Width="70"
             Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
         <TextBlock HorizontalAlignment="Center" 
-                   Margin="0,166,0,0" 
+                   Margin="0,129,0,0" 
                    TextWrapping="Wrap" 
                    VerticalAlignment="Top" 
-                   Width="193" TextAlignment="Center" FontSize="14">
+                   Width="193" TextAlignment="Center" FontSize="14" Height="19">
             <Run Language="ru-ru" 
                  Text="Изменение"/></TextBlock>
         <TextBox x:Name="FamNew" HorizontalAlignment="Left" 
-            Margin="71,302,0,0" 
+            Margin="71,265,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="70"
             Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
         <TextBox x:Name="NameNew" HorizontalAlignment="Left" 
-            Margin="146,302,0,0" 
+            Margin="146,265,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="70"
             Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
         <TextBox x:Name="OtchNew" HorizontalAlignment="Left" 
-            Margin="221,302,0,0" 
+            Margin="221,265,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="70"
             Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
         <TextBox x:Name="NumberNew" HorizontalAlignment="Left" 
-            Margin="296,302,0,0" 
+            Margin="296,265,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="70"
             Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
         <TextBox x:Name="PassNew" HorizontalAlignment="Left" 
-            Margin="371,302,0,0" 
+            Margin="371,265,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             Width="70"
             Height="30" TextAlignment="Center" IsEnabled="False" FontSize="11"/>
         <TextBlock HorizontalAlignment="Center" 
-            Margin="0,281,0,0" 
+            Margin="0,244,0,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
-            Width="193" TextAlignment="Center" FontSize="14"><Run Language="ru-ru" Text="Добавление"/></TextBlock>
+            Width="193" TextAlignment="Center" FontSize="14" Height="19"><Run Language="ru-ru" Text="Добавление"/></TextBlock>
         <Button x:Name="ButtonTB" 
                 Content="Изменить" 
                 HorizontalAlignment="Left" 
-                Margin="221,222,0,0" 
+                Margin="221,185,0,0" 
                 VerticalAlignment="Top" 
-                Width="70" Click="ButtonTB_Click" IsEnabled="False"/>
+                Width="70" Click="ButtonTB_Click" IsEnabled="False" Height="20"/>
         <Button x:Name="ButtonNew" 
                 Content="Добавить" 
                 HorizontalAlignment="Center" 
-                Margin="0,337,0,0" 
+                Margin="0,300,0,0" 
                 VerticalAlignment="Top" 
                 Width="70" 
-                Click="ButtonNew_Click" IsEnabled="False"/>
+                Click="ButtonNew_Click" IsEnabled="False" Height="20"/>
         <TextBlock HorizontalAlignment="Left" 
-                   Margin="380,21,0,0" 
+                   Margin="371,21,0,0" 
                    TextWrapping="Wrap" 
                    Text="Выберите клиента:" 
-                   VerticalAlignment="Top"/>
+                   VerticalAlignment="Top" Height="16" Width="112"/>
         <Button x:Name="ManagerButton" 
                 Content="Менеджер" 
                 HorizontalAlignment="Left" 
                 Margin="33,19,0,0" 
                 VerticalAlignment="Top" 
                 Width="73" 
-                Click="ManagerButton_Click"/>
+                Click="ManagerButton_Click" Height="20"/>
         <Button x:Name="ConsultantButton" 
                 Content="Консультант" 
                 HorizontalAlignment="Left" 
                 Margin="143,19,0,0" 
                 VerticalAlignment="Top" 
                 Width="73" 
-                Click="ConsultantButton_Click"/>
+                Click="ConsultantButton_Click" Height="20"/>
+
+        <ListBox
+            x:Name="AccountsListBox" 
+                 Grid.Column="1" 
+                 d:ItemsSource="{d:SampleData ItemCount=2}" 
+                 Margin="106,34,10,259">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin = "5">
+                        <TextBlock Text = "{Binding Index}"/>
+                        <TextBlock Text = "{Binding Money}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Button x:Name="NewAccountButton" Grid.Column="1" Content="Новый счет" HorizontalAlignment="Left" Margin="105,192,0,0" VerticalAlignment="Top" Width="82" Height="20" Click="NewAccountButton_Click"/>
+        <TextBox x:Name="NewMoneyTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="195,192,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="80"/>
+        <Button x:Name="TransferButton" Grid.Column="1" Content="Перевод" HorizontalAlignment="Left" Margin="105,244,0,0" VerticalAlignment="Top" Width="82" Click="TransferButton_Click"/>
+        <TextBox x:Name="TransferMoneyTextBox" Grid.Column="1" HorizontalAlignment="Left" Margin="195,244,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="80"/>
+        <Button x:Name="CloseAccountButton" Grid.Column="1" Content="Закрыть счет" HorizontalAlignment="Left" Margin="106,331,0,0" VerticalAlignment="Top" Width="81" Click="CloseAccountButton_Click"/>
+        <ComboBox x:Name="TransferFromComboBox" 
+                  Grid.Column="1" 
+                  HorizontalAlignment="Left" 
+                  Margin="105,273,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="82">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin = "5">
+                        <TextBlock Text = "{Binding Index}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <ComboBox x:Name="TransferToComboBox" 
+                  Grid.Column="1" 
+                  HorizontalAlignment="Left" 
+                  Margin="195,273,0,0" 
+                  VerticalAlignment="Top" 
+                  Width="80">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin = "5">
+                        <TextBlock Text = "{Binding Index}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+        <TextBlock Grid.Column="1" HorizontalAlignment="Left" Margin="150,13,0,0" TextWrapping="Wrap" Text="Счета клиента" VerticalAlignment="Top" Width="81"/>
+
+
 
     </Grid>
 </Window>

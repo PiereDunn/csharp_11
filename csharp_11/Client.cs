@@ -1,4 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Security.Policy;
+using System.Windows.Documents;
 
 namespace csharp_11
 {
@@ -30,7 +34,11 @@ namespace csharp_11
         /// </summary>
         public string Pass { get; set; }
 
-
+        /// <summary>
+        /// Счета
+        /// </summary>
+        public ObservableCollection<Account> accounts { get; set; }
+       
 
         /// <summary>
         /// Создание клиента
@@ -40,6 +48,7 @@ namespace csharp_11
         /// <param name="Otch"></param>
         /// <param name="Number"></param>
         /// <param name="Pass"></param>
+        /// <param name="accs"></param>
         public Client(string Fam, string Name, string Otch, string Number, string Pass)
         {
             this.Fam = Fam;
@@ -47,6 +56,23 @@ namespace csharp_11
             this.Otch = Otch;
             this.Number = Number;
             this.Pass = Pass;
+            accounts = new ObservableCollection<Account>();
+        }
+    }
+
+    //csharp_12
+
+    class Account
+    {
+        public int Index { get; set; }
+
+        public double Money { get; set; }
+
+
+        public Account(int Index, double Money)
+        {
+            this.Index = Index;
+            this.Money = Money;
         }
     }
 }

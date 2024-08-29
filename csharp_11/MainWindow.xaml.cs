@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Security.Principal;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -25,8 +26,11 @@ namespace csharp_11
             GetAllClients();
             InitializeComponent();
             ClientsListBox.ItemsSource = clients.OrderBy(client => client.Fam);
+
+
+
         }
-       
+
         /// <summary>
         /// Кнопка изменения параметров клиента
         /// </summary>
@@ -35,7 +39,7 @@ namespace csharp_11
         private void ButtonTB_Click(object sender, RoutedEventArgs e)
         {
             Client client1 = ClientsListBox.SelectedItem as Client;
-            if(managerBool)
+            if (managerBool)
             {
                 client1.Fam = FamTB.Text;
                 client1.Name = NameTB.Text;
@@ -58,7 +62,11 @@ namespace csharp_11
         /// <param name="e"></param>
         private void ButtonNew_Click(object sender, RoutedEventArgs e)
         {
-            if(FamNew.Text != String.Empty && NameNew.Text != String.Empty && OtchNew.Text != String.Empty && NumberNew.Text != String.Empty && PassNew.Text != String.Empty)
+            if (FamNew.Text != String.Empty 
+                && NameNew.Text != String.Empty 
+                && OtchNew.Text != String.Empty 
+                && NumberNew.Text != String.Empty 
+                && PassNew.Text != String.Empty)
             {
                 clients.Add(new Client(
                                FamNew.Text,                       //Фамилия
@@ -80,6 +88,9 @@ namespace csharp_11
         {
             Client client = ClientsListBox.SelectedItem as Client;
             ClientInformation(client);
+            AccountsListBox.ItemsSource = client.accounts;
+            TransferFromComboBox.ItemsSource = client.accounts;
+            TransferToComboBox.ItemsSource = client.accounts;
             ButtonTB.IsEnabled = true;
             listBoxClick = true;
         }
@@ -121,7 +132,7 @@ namespace csharp_11
         /// <param name="client"></param>
         private void OptionsChange(Client client)
         {
-            if(managerBool)
+            if (managerBool)
             {
                 FamTB.Text = client.Fam;
                 NameTB.Text = client.Name;
@@ -129,7 +140,7 @@ namespace csharp_11
                 NumberTB.Text = client.Number;
                 PassTB.Text = client.Pass;
             }
-            else if(consultantBool)
+            else if (consultantBool)
             {
                 FamTB.Text = client.Fam;
                 NameTB.Text = client.Name;
@@ -150,22 +161,38 @@ namespace csharp_11
             {
                 if (client.Number != String.Empty && client.Pass != String.Empty)
                 {
-                    ClientInformationtextBlock.Text = $"Фамилия: {client.Fam}. Имя: {client.Name}, Отчество: {client.Otch}, Номер: {client.Number}, Паспорт: {client.Pass}";
+                    ClientInformationtextBlock.Text = $"Фамилия: {client.Fam}. " +
+                        $"Имя: {client.Name}, " +
+                        $"Отчество: {client.Otch}, " +
+                        $"Номер: {client.Number}, " +
+                        $"Паспорт: {client.Pass}";
                     OptionsChange(client);
                 }
                 else if (client.Number == String.Empty && client.Pass != String.Empty)
                 {
-                    ClientInformationtextBlock.Text = $"Фамилия: {client.Fam}. Имя: {client.Name}, Отчество: {client.Otch}, Номер: {"отсутствует"}, Паспорт: {client.Pass}";
+                    ClientInformationtextBlock.Text = $"Фамилия: {client.Fam}. " +
+                        $"Имя: {client.Name}, " +
+                        $"Отчество: {client.Otch}, " +
+                        $"Номер: {"отсутствует"}, " +
+                        $"Паспорт: {client.Pass}";
                     OptionsChange(client);
                 }
                 else if (client.Number != String.Empty && client.Pass == String.Empty)
                 {
-                    ClientInformationtextBlock.Text = $"Фамилия: {client.Fam}. Имя: {client.Name}, Отчество: {client.Otch}, Номер: {client.Number}, Паспорт: {"отсутствует"}";
+                    ClientInformationtextBlock.Text = $"Фамилия: {client.Fam}. " +
+                        $"Имя: {client.Name}, " +
+                        $"Отчество: {client.Otch}, " +
+                        $"Номер: {client.Number}, " +
+                        $"Паспорт: {"отсутствует"}";
                     OptionsChange(client);
                 }
                 else
                 {
-                    ClientInformationtextBlock.Text = $"Фамилия: {client.Fam}. Имя: {client.Name}, Отчество: {client.Otch}, Номер: {"отсутствует"}, Паспорт: {"отсутствует"}";
+                    ClientInformationtextBlock.Text = $"Фамилия: {client.Fam}. " +
+                        $"Имя: {client.Name}, " +
+                        $"Отчество: {client.Otch}, " +
+                        $"Номер: {"отсутствует"}, " +
+                        $"Паспорт: {"отсутствует"}";
                     OptionsChange(client);
                 }
             }
@@ -174,22 +201,38 @@ namespace csharp_11
             {
                 if (client.Number != String.Empty && client.Pass != String.Empty)
                 {
-                    ClientInformationtextBlock.Text = $"Фамилия: {client.Fam}. Имя: {client.Name}, Отчество: {client.Otch}, Номер: {client.Number}, Паспорт: {"***"}";
+                    ClientInformationtextBlock.Text = $"Фамилия: {client.Fam}. " +
+                        $"Имя: {client.Name}, " +
+                        $"Отчество: {client.Otch}, " +
+                        $"Номер: {client.Number}, " +
+                        $"Паспорт: {"***"}";
                     OptionsChange(client);
                 }
                 else if (client.Number == String.Empty && client.Pass != String.Empty)
                 {
-                    ClientInformationtextBlock.Text = $"Фамилия: {client.Fam}. Имя: {client.Name}, Отчество: {client.Otch}, Номер: {"отсутствует"}, Паспорт: {"***"}";
+                    ClientInformationtextBlock.Text = $"Фамилия: {client.Fam}. " +
+                        $"Имя: {client.Name}, " +
+                        $"Отчество: {client.Otch}, " +
+                        $"Номер: {"отсутствует"}, " +
+                        $"Паспорт: {"***"}";
                     OptionsChange(client);
                 }
                 else if (client.Number != String.Empty && client.Pass == String.Empty)
                 {
-                    ClientInformationtextBlock.Text = $"Фамилия: {client.Fam}. Имя: {client.Name}, Отчество: {client.Otch}, Номер: {client.Number}, Паспорт: {"отсутствует"}";
+                    ClientInformationtextBlock.Text = $"Фамилия: {client.Fam}. " +
+                        $"Имя: {client.Name}, " +
+                        $"Отчество: {client.Otch}, " +
+                        $"Номер: {client.Number}, " +
+                        $"Паспорт: {"отсутствует"}";
                     OptionsChange(client);
                 }
                 else
                 {
-                    ClientInformationtextBlock.Text = $"Фамилия: {client.Fam}. Имя: {client.Name}, Отчество: {client.Otch}, Номер: {"отсутствует"}, Паспорт: {"отсутствует"}";
+                    ClientInformationtextBlock.Text = $"Фамилия: {client.Fam}. " +
+                        $"Имя: {client.Name}, " +
+                        $"Отчество: {client.Otch}, " +
+                        $"Номер: {"отсутствует"}, " +
+                        $"Паспорт: {"отсутствует"}";
                     OptionsChange(client);
                 }
             }
@@ -262,6 +305,59 @@ namespace csharp_11
             {
                 Client client = ClientsListBox.SelectedItem as Client;
                 ClientInformation(client);
+            }
+        }
+
+
+
+        //Методы для 1 задания 12 практической
+
+
+
+        /// <summary>
+        /// Создание нового счета для клиента
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NewAccountButton_Click(object sender, RoutedEventArgs e)
+        {
+            Client client = ClientsListBox.SelectedItem as Client;
+
+            if(double.TryParse(NewMoneyTextBox.Text, out double i) && i >= 0)
+            {
+                client.accounts.Add(new Account(client.accounts.Count + 1, i));
+            }
+        }
+
+        /// <summary>
+        /// Закрытие счета клиента
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CloseAccountButton_Click(object sender, RoutedEventArgs e)
+        {
+            Client client = ClientsListBox.SelectedItem as Client;
+            Account account = AccountsListBox.SelectedItem as Account;
+            client.accounts.Remove(account);
+        }
+
+        /// <summary>
+        /// Перевод средств с одного счета клиента, на другой
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TransferButton_Click(object sender, RoutedEventArgs e)
+        {
+            Account accountFrom = TransferFromComboBox.SelectedItem as Account;
+            Account accountTo = TransferToComboBox.SelectedItem as Account;
+
+            if(accountFrom != null && accountTo != null)
+            {
+                if (double.TryParse(TransferMoneyTextBox.Text, out double i) && i >= 0 && i <= accountFrom.Money)
+                {
+                    accountFrom.Money = accountFrom.Money - i;
+                    accountTo.Money = accountTo.Money + i;
+                }
             }
         }
     }
